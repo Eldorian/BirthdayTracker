@@ -1,0 +1,46 @@
+﻿@page
+@model BirthdayTracker.UI.Pages.Birthdays.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Birthday</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Birthday.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Birthday.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday.Birthdate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Birthday.Birthdate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday.Relationship)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Birthday.Relationship)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Birthday.Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

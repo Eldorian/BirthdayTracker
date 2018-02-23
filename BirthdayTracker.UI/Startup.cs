@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -32,6 +33,13 @@ namespace BirthdayTracker.UI
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped(_ =>
+                new HttpClient
+                {
+                    BaseAddress = new Uri(Configuration["serviceUrl"])
+                });
+            services.AddScoped<IApiClient, ApiClient>();
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>

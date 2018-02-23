@@ -1,0 +1,43 @@
+﻿@page
+@model BirthdayTracker.UI.Pages.Birthdays.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Birthday</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Birthday.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Birthday.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday.Birthdate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Birthday.Birthdate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday.Relationship)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Birthday.Relationship)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Birthday.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
