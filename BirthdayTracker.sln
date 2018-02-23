@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirthdayTracker.Backservice", "BirthdayTracker.Backservice\BirthdayTracker.Backservice.csproj", "{0844A78E-2FDC-4681-A52B-93F1A3E144CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirthdayTracker.API", "BirthdayTracker.Backservice\BirthdayTracker.API.csproj", "{0844A78E-2FDC-4681-A52B-93F1A3E144CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

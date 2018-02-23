@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BirthdayTracker.API.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace BirthdayTracker.Backservice
+namespace BirthdayTracker.API
 {
     public class Startup
     {
@@ -24,9 +20,8 @@ namespace BirthdayTracker.Backservice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<Repository.Repository>();
             services.AddMvc();
-
+            services.AddDbContext<BirthdayContext>(options => options.UseSqlite("Data Source=Birthday.db"));
             services.AddSwaggerGen(options =>
                 options.SwaggerDoc("v1", new Info {Title = "Birthday Tracker", Version = "v1"})
             );
@@ -46,6 +41,8 @@ namespace BirthdayTracker.Backservice
             }
 
             app.UseMvc();
+
+            BirthdayContext.SeedData(app.ApplicationServices);
         }
     }
 }
