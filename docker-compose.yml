@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  api:
+    image: birthdaytracker.api
+    build:
+      context: .
+      dockerfile: BirthdayTracker.API/Dockerfile
+
+  ui:
+    image: birthdaytracker.ui
+    environment:
+      - serviceUrl=http://api
+    build:
+      context: .
+      dockerfile: BirthdayTracker.UI/Dockerfile
+    links:
+      - api
+
+  db:
+    image: "microsoft/mssql-server-linux"
