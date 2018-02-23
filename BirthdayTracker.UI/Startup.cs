@@ -44,8 +44,10 @@ namespace BirthdayTracker.UI
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
+                    options.Conventions.AuthorizeFolder("/Birthdays");
                     options.Conventions.AuthorizeFolder("/Account/Manage");
                     options.Conventions.AuthorizePage("/Account/Logout");
+
                 });
 
             // Register no-op EmailSender used by account confirmation and password reset during development
