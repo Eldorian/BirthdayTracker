@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BirthdayTracker.API.Models;
@@ -24,6 +22,7 @@ namespace BirthdayTracker.UI.Services
         {
             this.httpClient = httpClient;
         }
+
         public async Task<List<Birthday>> GetBirthdays()
         {
             var response = await httpClient.GetAsync("/api/birthdays");

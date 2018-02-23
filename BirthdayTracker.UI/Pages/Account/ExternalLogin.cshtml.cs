@@ -1,22 +1,20 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using BirthdayTracker.UI.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using BirthdayTracker.UI.Data;
 
 namespace BirthdayTracker.UI.Pages.Account
 {
     public class ExternalLoginModel : PageModel
     {
+        private readonly ILogger<ExternalLoginModel> _logger;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
             SignInManager<ApplicationUser> signInManager,
@@ -28,22 +26,13 @@ namespace BirthdayTracker.UI.Pages.Account
             _logger = logger;
         }
 
-        [BindProperty]
-        public InputModel Input { get; set; }
+        [BindProperty] public InputModel Input { get; set; }
 
         public string LoginProvider { get; set; }
 
         public string ReturnUrl { get; set; }
 
-        [TempData]
-        public string ErrorMessage { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
-        }
+        [TempData] public string ErrorMessage { get; set; }
 
         public IActionResult OnGetAsync()
         {
@@ -53,7 +42,7 @@ namespace BirthdayTracker.UI.Pages.Account
         public IActionResult OnPost(string provider, string returnUrl = null)
         {
             // Request a redirect to the external login provider.
-            var redirectUrl = Url.Page("./ExternalLogin", pageHandler: "Callback", values: new { returnUrl });
+            var redirectUrl = Url.Page("./ExternalLogin", pageHandler: "Callback", values: new {returnUrl});
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties);
         }
@@ -65,6 +54,7 @@ namespace BirthdayTracker.UI.Pages.Account
                 ErrorMessage = $"Error from external provider: {remoteError}";
                 return RedirectToPage("./Login");
             }
+
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
@@ -72,12 +62,15 @@ namespace BirthdayTracker.UI.Pages.Account
             }
 
             // Sign in the user with this external login provider if the user already has a login.
-            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor : true);
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey,
+                isPersistent: false, bypassTwoFactor: true);
             if (result.Succeeded)
             {
-                _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+                _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name,
+                    info.LoginProvider);
                 return LocalRedirect(Url.GetLocalUrl(returnUrl));
             }
+
             if (result.IsLockedOut)
             {
                 return RedirectToPage("./Lockout");
@@ -94,6 +87,7 @@ namespace BirthdayTracker.UI.Pages.Account
                         Email = info.Principal.FindFirstValue(ClaimTypes.Email)
                     };
                 }
+
                 return Page();
             }
         }
@@ -108,7 +102,8 @@ namespace BirthdayTracker.UI.Pages.Account
                 {
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+
+                var user = new ApplicationUser {UserName = Input.Email, Email = Input.Email};
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -120,6 +115,7 @@ namespace BirthdayTracker.UI.Pages.Account
                         return LocalRedirect(Url.GetLocalUrl(returnUrl));
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -128,6 +124,11 @@ namespace BirthdayTracker.UI.Pages.Account
 
             ReturnUrl = returnUrl;
             return Page();
+        }
+
+        public class InputModel
+        {
+            [Required] [EmailAddress] public string Email { get; set; }
         }
     }
 }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BirthdayTracker.API.Models;
+using BirthdayTracker.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using BirthdayTracker.API.Models;
-using BirthdayTracker.UI.Data;
-using BirthdayTracker.UI.Services;
 
 namespace BirthdayTracker.UI.Pages.Birthdays
 {
@@ -35,6 +30,7 @@ namespace BirthdayTracker.UI.Pages.Birthdays
             {
                 return NotFound();
             }
+
             return Page();
         }
     }

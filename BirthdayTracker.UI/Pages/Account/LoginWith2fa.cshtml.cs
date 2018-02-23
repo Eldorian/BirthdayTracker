@@ -1,20 +1,18 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
+using BirthdayTracker.UI.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using BirthdayTracker.UI.Data;
 
 namespace BirthdayTracker.UI.Pages.Account
 {
     public class LoginWith2faModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginWith2faModel> _logger;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public LoginWith2faModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginWith2faModel> logger)
         {
@@ -22,24 +20,11 @@ namespace BirthdayTracker.UI.Pages.Account
             _logger = logger;
         }
 
-        [BindProperty]
-        public InputModel Input { get; set; }
+        [BindProperty] public InputModel Input { get; set; }
 
         public bool RememberMe { get; set; }
 
         public string ReturnUrl { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Text)]
-            [Display(Name = "Authenticator code")]
-            public string TwoFactorCode { get; set; }
-
-            [Display(Name = "Remember this machine")]
-            public bool RememberMachine { get; set; }
-        }
 
         public async Task<IActionResult> OnGetAsync(bool rememberMe, string returnUrl = null)
         {
@@ -72,7 +57,9 @@ namespace BirthdayTracker.UI.Pages.Account
 
             var authenticatorCode = Input.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
 
-            var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, Input.RememberMachine);
+            var result =
+                await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe,
+                    Input.RememberMachine);
 
             if (result.Succeeded)
             {
@@ -90,6 +77,19 @@ namespace BirthdayTracker.UI.Pages.Account
                 ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
                 return Page();
             }
-        }  
+        }
+
+        public class InputModel
+        {
+            [Required]
+            [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+                MinimumLength = 6)]
+            [DataType(DataType.Text)]
+            [Display(Name = "Authenticator code")]
+            public string TwoFactorCode { get; set; }
+
+            [Display(Name = "Remember this machine")]
+            public bool RememberMachine { get; set; }
+        }
     }
 }

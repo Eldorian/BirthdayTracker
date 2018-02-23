@@ -1,19 +1,17 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using BirthdayTracker.UI.Data;
+using BirthdayTracker.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BirthdayTracker.UI.Data;
-using BirthdayTracker.UI.Services;
 
 namespace BirthdayTracker.UI.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
@@ -21,15 +19,7 @@ namespace BirthdayTracker.UI.Pages.Account
             _emailSender = emailSender;
         }
 
-        [BindProperty]
-        public InputModel Input { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
-        }
+        [BindProperty] public InputModel Input { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -51,6 +41,11 @@ namespace BirthdayTracker.UI.Pages.Account
             }
 
             return Page();
+        }
+
+        public class InputModel
+        {
+            [Required] [EmailAddress] public string Email { get; set; }
         }
     }
 }

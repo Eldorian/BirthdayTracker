@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Microsoft.AspNetCore.Mvc
 {
     public static class UrlHelperExtensions
@@ -22,16 +17,17 @@ namespace Microsoft.AspNetCore.Mvc
             return urlHelper.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
-                values: new { userId, code },
+                values: new {userId, code},
                 protocol: scheme);
         }
 
-        public static string ResetPasswordCallbackLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
+        public static string ResetPasswordCallbackLink(this IUrlHelper urlHelper, string userId, string code,
+            string scheme)
         {
             return urlHelper.Page(
                 "/Account/ResetPassword",
                 pageHandler: null,
-                values: new { userId, code },
+                values: new {userId, code},
                 protocol: scheme);
         }
     }

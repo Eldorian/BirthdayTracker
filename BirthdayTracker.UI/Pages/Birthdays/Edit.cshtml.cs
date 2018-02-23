@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BirthdayTracker.API.Models;
+using BirthdayTracker.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using BirthdayTracker.API.Models;
-using BirthdayTracker.UI.Data;
-using BirthdayTracker.UI.Services;
 
 namespace BirthdayTracker.UI.Pages.Birthdays
 {
@@ -21,8 +15,7 @@ namespace BirthdayTracker.UI.Pages.Birthdays
             this.client = client;
         }
 
-        [BindProperty]
-        public Birthday Birthday { get; set; }
+        [BindProperty] public Birthday Birthday { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -37,6 +30,7 @@ namespace BirthdayTracker.UI.Pages.Birthdays
             {
                 return NotFound();
             }
+
             return Page();
         }
 

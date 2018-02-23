@@ -1,17 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
+using BirthdayTracker.UI.Data;
+using BirthdayTracker.UI.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BirthdayTracker.UI.Data;
-using BirthdayTracker.UI.Services;
 
 namespace BirthdayTracker.UI
 {
@@ -47,7 +43,6 @@ namespace BirthdayTracker.UI
                     options.Conventions.AuthorizeFolder("/Birthdays");
                     options.Conventions.AuthorizeFolder("/Account/Manage");
                     options.Conventions.AuthorizePage("/Account/Logout");
-
                 });
 
             // Register no-op EmailSender used by account confirmation and password reset during development

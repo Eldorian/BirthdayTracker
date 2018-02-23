@@ -1,5 +1,5 @@
 ﻿@page
-@model BirthdayTracker.UI.Pages.Birthdays.CreateModel
+@model Birthdays.CreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -8,33 +8,33 @@
 <h2>Create</h2>
 
 <h4>Birthday</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Birthday.Name" class="control-label"></label>
-                <input asp-for="Birthday.Name" class="form-control" />
+                <input asp-for="Birthday.Name" class="form-control"/>
                 <span asp-validation-for="Birthday.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Birthday.Email" class="control-label"></label>
-                <input asp-for="Birthday.Email" class="form-control" />
+                <input asp-for="Birthday.Email" class="form-control"/>
                 <span asp-validation-for="Birthday.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Birthday.Birthdate" class="control-label"></label>
-                <input asp-for="Birthday.Birthdate" class="form-control" />
+                <input asp-for="Birthday.Birthdate" class="form-control"/>
                 <span asp-validation-for="Birthday.Birthdate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Birthday.Relationship" class="control-label"></label>
-                <input asp-for="Birthday.Relationship" class="form-control" />
+                <input asp-for="Birthday.Relationship" class="form-control"/>
                 <span asp-validation-for="Birthday.Relationship" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default"/>
             </div>
         </form>
     </div>
@@ -45,5 +45,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

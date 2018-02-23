@@ -1,19 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using BirthdayTracker.UI.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using BirthdayTracker.UI.Data;
 
 namespace BirthdayTracker.UI.Controllers
 {
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger _logger;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public AccountController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger)
         {

@@ -1,19 +1,17 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using BirthdayTracker.UI.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using BirthdayTracker.UI.Data;
 
 namespace BirthdayTracker.UI.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<ApplicationUser> _userManager;
         ILogger<ResetAuthenticatorModel> _logger;
+        UserManager<ApplicationUser> _userManager;
 
         public ResetAuthenticatorModel(
             UserManager<ApplicationUser> userManager,
@@ -22,6 +20,7 @@ namespace BirthdayTracker.UI.Pages.Account.Manage
             _userManager = userManager;
             _logger = logger;
         }
+
         public async Task<IActionResult> OnGet()
         {
             var user = await _userManager.GetUserAsync(User);
