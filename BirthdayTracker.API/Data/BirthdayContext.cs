@@ -35,7 +35,6 @@ namespace BirthdayTracker.API.Data
                 {
                     new Birthday
                     {
-                        Id = 1,
                         Name = "Jennifer Cook",
                         Birthdate = new DateTime(2018, 4, 21),
                         Email = "jcook@gmail.com",
@@ -43,7 +42,6 @@ namespace BirthdayTracker.API.Data
                     },
                     new Birthday
                     {
-                        Id = 2,
                         Name = "Mary DeYeager",
                         Birthdate = new DateTime(2018, 2, 11),
                         Email = "mdeyeager@gmail.com",
@@ -51,7 +49,6 @@ namespace BirthdayTracker.API.Data
                     },
                     new Birthday
                     {
-                        Id = 3,
                         Name = "Eric Currin",
                         Birthdate = new DateTime(2018, 9, 30),
                         Email = "ecurrin@gmail.com",

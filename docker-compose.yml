@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: BirthdayTracker.API/Dockerfile
+    depends_on:
+      - db
 
   ui:
     image: birthdaytracker.ui

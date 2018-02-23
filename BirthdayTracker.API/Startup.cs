@@ -21,7 +21,7 @@ namespace BirthdayTracker.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<BirthdayContext>(options => options.UseSqlite("Data Source=Birthday.db"));
+            services.AddDbContext<BirthdayContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(options =>
                 options.SwaggerDoc("v1", new Info {Title = "Birthday Tracker", Version = "v1"})
             );
